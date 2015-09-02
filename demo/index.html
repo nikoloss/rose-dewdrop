@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="stock.css">
+	<script type="text/javascript" src="jq.js"></script>
+	<script type="text/javascript" src="j.js"></script>
+</head>
+<body>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 苹果 AAPL </span>
+	<span class="price" id="aapl_value"> $ 100 [-] 0,0</span>
+</div>
+
+<div id="aapl" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 500彩票网 WBAI </span>
+	<span class="price" id="wbai_value"> $ 20 [-] 0,0</span>
+</div>
+
+<div id="wbai" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 谷歌 GOOG </span>
+	<span class="price" id="goog_value"> $ 165 [-] 0,0</span>
+</div>
+
+<div id="goog" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 百度 BAID </span>
+	<span class="price" id="baid_value"> $ 144 [-] 0,0</span>
+</div>
+
+<div id="baid" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 京东 JD </span>
+	<span class="price" id="jd_value"> $ 33 [-] 0,0</span>
+</div>
+
+<div id="jd" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 因特尔 INTR </span>
+	<span class="price" id="intr_value"> $ 39 [-] 0,0</span>
+</div>
+
+<div id="intr" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 施恩制药 SHNE </span>
+	<span class="price" id="shne_value"> $ 178 [-] 0,0</span>
+</div>
+
+<div id="shne" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 美国能源 APEX </span>
+	<span class="price" id="apex_value"> $ 35 [停牌中] </span>
+</div>
+
+<div id="apex" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 微软公司 MSFT </span>
+	<span class="price" id="msft_value"> $ 43.9 [-] 0,0</span>
+</div>
+
+<div id="msft" class="box">
+</div>
+
+<div style="position: absolute;border: 1px dashed #CCCCCC; height:50px; width:200px">
+	<span class="brand"> 德州仪器 TXN </span>
+	<span class="price" id="txn_value"> $ 47.05 [-] 0,0 </span>
+</div>
+
+<div id="txn" class="box">
+</div>
+
+
+<script>
+var up_st_ary = new Array();
+var down_st_ary = new Array();
+
+function red_brand(brand){
+	up_st_ary[brand] = ((up_st_ary[brand]|0) + 1) % 2;
+	if (up_st_ary[brand]==0)
+	{
+		bg.removeClass('fade-out');
+		bg.removeClass('fade-out2');
+		bg.removeClass('fade-in');
+		bg.removeClass('fade-in2');
+		bg.addClass('fade-in');
+	}else{
+		bg.removeClass('fade-out');
+		bg.removeClass('fade-out2');
+		bg.removeClass('fade-in');
+		bg.removeClass('fade-in2');
+		bg.addClass('fade-in2');
+	}
+}
+
+function red_price(brand, value, counts, range){
+	span = $("#"+brand+"_value");
+	bg = $("#"+brand);
+	span.css("color", "#CC0000");
+	span.text("$ "+value+" [↑] "+counts+","+range+"%");
+}
+
+function green_brand(brand){
+	down_st_ary[brand] = ((down_st_ary[brand]|0) + 1)%2;
+	if (down_st_ary[brand] == 0)
+	{
+		bg.removeClass('fade-out');
+		bg.removeClass('fade-out2');
+		bg.removeClass('fade-in');
+		bg.removeClass('fade-in2');
+		bg.addClass('fade-out');
+	}else{
+		bg.removeClass('fade-out');
+		bg.removeClass('fade-out2');
+		bg.removeClass('fade-in');
+		bg.removeClass('fade-in2');
+		bg.addClass('fade-out2');
+	}
+}
+
+function green_price(brand, value, counts, range){
+	span = $("#"+brand+"_value");
+	bg = $("#"+brand);
+	span.css("color", "#009966");
+	span.text("$ "+value+" [↓] "+counts+","+range+"%");
+}
+
+var s = new WebSocket('ws://127.0.0.1:8880/stare_at/stock')
+s.onmessage = function(v){
+	//console.log(v.data);
+	ary = new Array();
+	ary = v.data.split(',');
+	brand = ary[0];
+	price = ary[1];
+	counts = ary[2];
+	range = ary[3];
+	steps = ary[4];
+	if (parseFloat(counts) < 0)
+	{
+		green_price(brand, price, counts, range);
+	}else{
+		red_price(brand, price, counts, range);
+	}
+	if (parseFloat(steps) < 0)
+	{
+		green_brand(brand);
+	}else{
+		red_brand(brand);
+	}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+.box {
+	padding-top:1px;
+    width: 200px;
+    height: 50px;
+}
+.box.fade-in {
+    animation: up 0.5s
+}
+.box.fade-in2 {
+    animation: up2 0.5s
+}
+.box.fade-out {
+    animation: down 0.5s
+}
+.box.fade-out2 {
+    animation: down2 0.5s
+}
+.brand {
+	width:200px;
+	height:25px;
+	line-height:20px;
+	text-align:center;
+	display:block;
+	font:15px/1.7 "微软雅黑", arial, \5b8b\4f53;
+	font-weight:bold;
+	color: #6600FF
+}
+.price {
+	width:200px;
+	height:25px;
+	line-height:20px;
+	padding-left:21px;
+	display:block;
+	font:14px "微软雅黑", arial, \5b8b\4f53;
+	font-weight:bold;
+	color: #777777;
+}
+
+
+@keyframes up
+{
+	0% {
+		background:#CC0000;
+		transform:scale(1);
+		opacity:0.6
+	}
+	100% {
+		background:#CC0000;
+		transform:scale(0.8);
+		opacity:0
+	}
+}
+
+@keyframes up2
+{
+	0% {
+		background:#CC0000;
+		transform:scale(1);
+		opacity:0.6
+	}
+	100% {
+		background:#CC0000;
+		transform:scale(0.8);
+		opacity:0
+	}
+}
+
+@keyframes down
+{
+	0% {
+		background:#009966;
+		transform:scale(1);
+		opacity:0.6
+	}
+	100% {
+		background:#009966;
+		transform:scale(0.8);
+		opacity:0
+	}
+}
+
+@keyframes down2
+{
+	0% {
+		background:#009966;
+		transform:scale(1);
+		opacity:0.6
+	}
+	100% {
+		background:#009966;
+		transform:scale(0.8);
+		opacity:0
+	}
+}
