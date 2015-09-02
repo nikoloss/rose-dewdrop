@@ -9,7 +9,6 @@ import tornado.ioloop
 import tornado.web
 from lxml import etree
 from lib.tools import XMLUtils
-from lib.halo import executor
 from types import FunctionType
 from lib.web.err import BizError
 from tornado.log import app_log
