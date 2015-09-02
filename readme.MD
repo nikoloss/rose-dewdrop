@@ -1,8 +1,8 @@
 ## What is Rose&Dewdrop?
 ######Rose&Dewdrop 是一个基于tornado和zeromq的分布式websocket消息发布组建
-*其中rose构建于zeromq主要承担消息发布中心角色
-*dewdrop构建于tornado并集成一个小型zeromq(PUB/SUB)发布中心
-*rndsdk则承担选择最优rose节点并给rose节点下达消息发布作业的角色
+* 其中rose构建于zeromq主要承担消息发布中心角色
+* dewdrop构建于tornado并集成一个小型zeromq(PUB/SUB)发布中心
+* rndsdk则承担选择最优rose节点并给rose节点下达消息发布作业的角色
 ![r&d_structure](rdstu.png)
 ## 为什么tornado节点不直接把websocket链接绑定到rose？
 * 好处主要有两个
