@@ -1,0 +1,1 @@
+![demo_stock](stock.gif)
