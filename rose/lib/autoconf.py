@@ -86,7 +86,7 @@ class ConfigParserFromFile(ConfigParser):
         with open(fullpath, 'r') as f:
             raw = f.read()
             #去掉多行注释
-            raw_escape_comment = re.sub(r'/\*[\s\S]+?\*/', '', raw)
+            raw_escape_comment = re.sub(r'[\s\t\n]+/\*[\s\S]+?\*/', '', raw)
             cfg = json.loads(raw_escape_comment)
             if cfg.get('$includes'):
                 for include in cfg['$includes']:

@@ -1,8 +1,8 @@
 {
     "radio":{
-        /*用来处理sdk请求*/
+        /* handle sdk request of push a message */
         "protocol": "tcp://*:9074",
-        /*用来广播供dew节点的hub订阅*/
+        /* for dewdrop node mini hub to subscribe */
         "pub": "tcp://*:9075"
     }
 }
