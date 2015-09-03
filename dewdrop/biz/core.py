@@ -4,13 +4,8 @@ import tornado.web
 
 from lib.autoconf import conf_drawer
 from lib import path
-import json
 import tornado.ioloop
 import tornado.web
-from lxml import etree
-from lib.tools import XMLUtils
-from types import FunctionType
-from lib.web.err import BizError
 from tornado.log import app_log
 
 logger = app_log

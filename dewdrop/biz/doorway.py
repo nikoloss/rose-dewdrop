@@ -1,6 +1,5 @@
 #coding: utf-8
 import tornado.websocket
-from tornado.log import app_log
 from core import *
 from msglet import Msglet
 
