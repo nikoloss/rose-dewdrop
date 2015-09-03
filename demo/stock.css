@@ -4,16 +4,20 @@
     height: 50px;
 }
 .box.fade-in {
-    animation: up 0.5s
+    animation: up 0.5s;
+    -webkit-animation: up 0.5s;
 }
 .box.fade-in2 {
-    animation: up2 0.5s
+    animation: up2 0.5s;
+    -webkit-animation: up2 0.5s;
 }
 .box.fade-out {
-    animation: down 0.5s
+    animation: down 0.5s;
+    -webkit-animation: down 0.5s;
 }
 .box.fade-out2 {
-    animation: down2 0.5s
+    animation: down2 0.5s;
+    -webkit-animation: down2 0.5s;
 }
 .brand {
 	width:200px;
@@ -42,12 +46,26 @@
 	0% {
 		background:#CC0000;
 		transform:scale(1);
-		opacity:0.6
+		opacity:0.6;
 	}
 	100% {
 		background:#CC0000;
 		transform:scale(0.8);
-		opacity:0
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes up
+{
+	0% {
+		background:#CC0000;
+		-webkit-transform:scale(1);
+		opacity:0.6;
+	}
+	100% {
+		background:#CC0000;
+		-webkit-transform:scale(0.8);
+		opacity:0;
 	}
 }
 
@@ -56,12 +74,26 @@
 	0% {
 		background:#CC0000;
 		transform:scale(1);
-		opacity:0.6
+		opacity:0.6;
 	}
 	100% {
 		background:#CC0000;
 		transform:scale(0.8);
-		opacity:0
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes up2
+{
+	0% {
+		background:#CC0000;
+		-webkit-transform:scale(1);
+		opacity:0.6;
+	}
+	100% {
+		background:#CC0000;
+		-webkit-transform:scale(0.8);
+		opacity:0;
 	}
 }
 
@@ -70,12 +102,26 @@
 	0% {
 		background:#009966;
 		transform:scale(1);
-		opacity:0.6
+		opacity:0.6;
 	}
 	100% {
 		background:#009966;
 		transform:scale(0.8);
-		opacity:0
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes down
+{
+	0% {
+		background:#009966;
+		-webkit-transform:scale(1);
+		opacity:0.6;
+	}
+	100% {
+		background:#009966;
+		-webkit-transform:scale(0.8);
+		opacity:0;
 	}
 }
 
@@ -84,11 +130,25 @@
 	0% {
 		background:#009966;
 		transform:scale(1);
-		opacity:0.6
+		opacity:0.6;
 	}
 	100% {
 		background:#009966;
 		transform:scale(0.8);
-		opacity:0
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes down2
+{
+	0% {
+		background:#009966;
+		-webkit-transform:scale(1);
+		opacity:0.6;
+	}
+	100% {
+		background:#009966;
+		-webkit-transform:scale(0.8);
+		opacity:0;
 	}
 }
