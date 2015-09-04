@@ -34,7 +34,5 @@ if __name__ == "__main__":
         includes = os.path.join(path._ETC_PATH, 'includes_dev.json')
         print "no configuration found!,will use [%s] instead" % includes
     prepare(includes)
-
-
-    Log().getLog().info("starting...")
+    Log.rose_log().info("starting...")
     ZMQIOLoop.instance().start()

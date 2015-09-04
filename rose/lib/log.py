@@ -3,8 +3,6 @@ import logging, os, path
 import logging.config
 from autoconf import conf_drawer
 
-rose_log = None
-
 
 @conf_drawer.register_my_setup(look='logging', level=1)
 def set_up(cfg):
@@ -16,5 +14,7 @@ def set_up(cfg):
 
 class Log(object):
     logger = None
-    def getLog(self):
+
+    @staticmethod
+    def rose_log():
         return Log.logger
