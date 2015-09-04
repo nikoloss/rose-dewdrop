@@ -2,11 +2,12 @@
 import tornado.websocket
 from core import *
 from msglet import Msglet
+from tornado.log import app_log
 
 
 @Application.register(path='/stare_at/(\w+)')
 class EchoWebSocket(tornado.websocket.WebSocketHandler):
-
+    '''stare_at后为订阅的主题'''
     def check_origin(self, origin):
         return True
 

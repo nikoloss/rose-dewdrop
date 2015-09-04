@@ -3,6 +3,7 @@
         "base.json"
     ],
     "logging": {
-        "config_file": "dev_log.conf"
+        "config_file": "dev_log.conf",
+        "logger": "simple"
     }
 }

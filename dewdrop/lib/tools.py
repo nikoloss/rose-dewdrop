@@ -2,19 +2,11 @@
 # author Rowland
 # edit 2014-03-19 14:16:46
 
-import logging
-import logging.config
+
 import requests
-import os, urllib, urllib2, re, time
+import time
 
-from autoconf import conf_drawer
 from web import err
-import path
-
-@conf_drawer.register_my_setup(look='logging', level=1)
-def set_up(cfg):
-    log_path = os.path.join(path._ETC_PATH, cfg['config_file'])
-    logging.config.fileConfig(log_path)
 
 
 def fetch(dist, params=None, method='get'):

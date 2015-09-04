@@ -8,6 +8,10 @@ from biz import core
 
 from zmq.eventloop.ioloop import ZMQIOLoop
 
+from lib.log import Log
+
+
+
 def prepare(conf_file):
     cpff = ConfigParserFromFile()
     conf_file | E(cpff.parseall) | E(conf_drawer.setup)
@@ -30,4 +34,7 @@ if __name__ == "__main__":
         includes = os.path.join(path._ETC_PATH, 'includes_dev.json')
         print "no configuration found!,will use [%s] instead" % includes
     prepare(includes)
+
+
+    Log().getLog().info("starting...")
     ZMQIOLoop.instance().start()

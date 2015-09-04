@@ -9,9 +9,19 @@ loop.install()
 from lib.autoconf import *
 from lib import path
 from biz import core
+import logging
+import logging.config
+
+from tornado.log import app_log
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+
+@conf_drawer.register_my_setup(look='logging', level=1)
+def set_up(cfg):
+    log_path = os.path.join(path._ETC_PATH, cfg['config_file'])
+    logging.config.fileConfig(log_path)
 
 
 def prepare(conf_file):
