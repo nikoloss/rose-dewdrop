@@ -37,7 +37,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         settings = {
             'xsrf_cookies': False,
-            'autoreload': True
+            'autoreload': False
         }
         if Application.handlers:
             super(Application, self).__init__(Application.handlers, settings)
