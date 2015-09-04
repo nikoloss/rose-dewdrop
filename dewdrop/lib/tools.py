@@ -22,7 +22,6 @@ def fetch(dist, params=None, method='get'):
             raise err.RemoteError()
         return r.content
     except Exception, e:
-        #Log().rose_log().exception('---url:%s ---', dist)
         raise e
     finally:
         if r:
