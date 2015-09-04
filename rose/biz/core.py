@@ -6,6 +6,7 @@ import traceback
 from abc import *
 from zmq.eventloop.zmqstream import ZMQStream
 from lib.autoconf import conf_drawer
+from lib.log import Log
 
 rose = None
 
@@ -49,12 +50,14 @@ class Rose(object):
     def sprinkling(self, msg):
         try:
             topic, body = msg[0].split('----')
+            #Log.rose_log().debug(msg)
             handler = self.handlers.get(topic, DefaultHandler)()
             handler.process(self.pub, topic, body)
             #time.sleep(0.09)
             self.ressock.send('ok')
         except Exception, e:
             self.ressock.send(str(e))
+            Log.rose_log().exception(e)
 
     def plant(self):
         self.ctx = zmq.Context()
