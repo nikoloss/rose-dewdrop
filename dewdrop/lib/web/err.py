@@ -8,7 +8,3 @@ class BizError(Exception):
 class RemoteError(BizError):
     code = '19'
     reason = '远程服务器不可达'
-
-class SessionError(BizError):
-    code = '102'
-    reason = 'ck失效'
