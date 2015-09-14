@@ -5,6 +5,8 @@
 * rndsdk则承担选择最优rose节点并给rose节点下达消息发布作业的角色
 ![r&d_structure](rdstu.png)
 
+* 疑问请联系(rowland.lan@163.com)
+
 ##架构设计
 * dewdrop中tornado集成一个zeromq的PUB/SUB的迷你hub(使用ipc协议，实现为mmap)，每个websocket会绑定一个sub订阅这个本机hub
 * 本机hub同时订阅所有的rose HUB节点，一旦rose HUB发布消息，本地迷你hub做一次转发
@@ -28,7 +30,5 @@
 
 ##演示
 ######实例在demo中，先把dewdrop的serv.py跟rose的bloom.py跑起来，然后运行sdk中wand的test2，是一个每几十毫秒生成一条广播股价的服务
-
-* 邮件(rowland.lan@163.com)
 
 ![demo_stock](stock.gif)
