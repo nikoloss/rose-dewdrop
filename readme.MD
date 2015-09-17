@@ -32,3 +32,4 @@
 ######实例在demo中，先把dewdrop的serv.py跟rose的bloom.py跑起来，然后运行sdk中wand的test2，是一个每几十毫秒生成一条广播股价的服务
 
 ![demo_stock](stock.gif)
+![demo_brush](cvb.gif)
