@@ -26,7 +26,7 @@ def set_up(cfg):
 
 def prepare(conf_file):
     cpff = ConfigParserFromFile()
-    conf_file | E(cpff.parseall) | E(conf_drawer.setup)
+    conf_file | when(cpff.parseall) | when(conf_drawer.setup)
 
 
 if __name__ == "__main__":

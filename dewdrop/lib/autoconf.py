@@ -16,7 +16,7 @@ class ConfigParser(object):
         pass
 
 
-class E(object):
+class when(object):
     def __init__(self, func):
         self.func = func
 
