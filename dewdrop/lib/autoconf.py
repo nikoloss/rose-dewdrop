@@ -9,7 +9,6 @@ import traceback
 class ConfigParser(object):
     '''
         This abstract class provides a strategy of how to get those configurations
-        through a file or remote config ?
     '''
     @abstractmethod
     def parseall(self, *args):
