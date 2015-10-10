@@ -1,3 +1,6 @@
 #ignore .idea/*
+*.log
+*.log.*
 .idea
+.D*
 *.pyc
