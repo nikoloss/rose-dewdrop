@@ -1,9 +1,0 @@
-{
-    "$includes": [
-        "base.json"
-    ],
-    "logging": {
-        "config_file": "dev_log.conf",
-        "logger": "simple"
-    }
-}

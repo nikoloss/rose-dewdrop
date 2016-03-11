@@ -142,11 +142,24 @@ function green_price(brand, value, counts, range){
 	span.text("$ "+value+" [↓] "+counts+","+range+"%");
 }
 
-var s = new WebSocket('ws://127.0.0.1:8880/stare_at/stock')
+
+// -------------------------------websocket
+
+
+// new Websocket
+var s = new WebSocket('ws://localhost:8888/api/push/ws');
+
+// register my topic
+s.onopen = function(){
+	this.send('{"action":"subs","stamp":"x","data":["stock"]}');
+}
+
+// handle my data
 s.onmessage = function(v){
 	//console.log(v.data);
+	obj = JSON.parse(v.data)
 	ary = new Array();
-	ary = v.data.split(',');
+	ary = obj['data'].split(',');
 	brand = ary[0];
 	price = ary[1];
 	counts = ary[2];
@@ -165,6 +178,9 @@ s.onmessage = function(v){
 		red_brand(brand);
 	}
 }
+
+// ping/pong heartbeat
+job = setInterval('s.send(\'{"action":"ping"}\')' , 5000);
 </script>
 
 </body>

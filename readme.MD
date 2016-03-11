@@ -1,9 +1,3 @@
-## Notice
-###### The project is temporary under reconstruction
-
-##注意
-###### 此项目目前处于大规模重构当中,预计完工预期3.14日
-
 ## What is Rose&Dewdrop?
 ######Rose&Dewdrop 是一个基于tornado和zeromq的分布式websocket消息发布组件
 * 其中rose构建于zeromq主要承担消息发布中心角色(HUB)
@@ -14,8 +8,8 @@
 * 疑问请联系(rowland.lan@163.com)
 
 ##架构设计
-* dewdrop中tornado集成一个zeromq的PUB/SUB的迷你hub(使用ipc协议，实现为mmap)，每个websocket会绑定一个sub订阅这个本机hub
-* 本机hub同时订阅所有的rose HUB节点，一旦rose HUB发布消息，本地迷你hub做一次转发
+* dewdrop中tornado集成一个zeromq的PUB/SUB的迷你hub(使用ipc协议)，每个websocket会绑定一个sub订阅这个本机hub
+* 本机hub同时订阅所有的rose-ihq节点，一旦rose-ihq发布消息，本地迷你hub做一次转发
 * rndsdk是用来给rose iHQ下达消息作业的
 
 

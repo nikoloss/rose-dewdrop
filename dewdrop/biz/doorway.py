@@ -9,7 +9,7 @@ import time
 import json
 
 
-HEARTBEAT_CC = 40
+HEARTBEAT_CC = 60
 
 MEMBERS = 0
 

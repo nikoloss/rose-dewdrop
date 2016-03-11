@@ -1,8 +1,0 @@
-{
-    "radio":{
-        /* handle sdk request of push a message */
-        "protocol": "tcp://*:9074",
-        /* for dewdrop node mini hub to subscribe */
-        "pub": "tcp://*:9075"
-    }
-}

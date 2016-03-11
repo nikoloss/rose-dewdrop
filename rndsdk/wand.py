@@ -1,56 +1,13 @@
-# coding: utf8
-import random
-from threading import Thread
-from threading import Lock
-from core import *
-from ant import MazeContext
+#coding:utf8
+import time, random
+from sdk import Operation
 
+def test1(op):
+    for i in range(10):
+        time.sleep(3)
+        op.send('bbb', 'hello world')
 
-poller = zmq.Poller()
-
-sock_cache = {}
-
-def initialize():
-    assert Config.dists
-    assert Config.RESTIMEOUT > 0
-    ctx = zmq.Context()
-    for dist in Config.dists:
-        sock = ctx.socket(zmq.REQ)
-        sock.connect(dist)
-        sock_cache[dist] = sock
-
-    Tiktok().start()
-    Thread(target=Proxy.instance().looping).start()
-
-
-def send(topic, body):
-    return __send('{topic}----{body}'.format(topic=topic, body=body))
-
-
-def __send(msg):
-    while not MazeContext.last_choice:
-        pass
-    choice = MazeContext.last_choice
-    sock = sock_cache[choice]
-    sock.send(msg)
-    poller.register(sock, zmq.POLLIN)
-    if poller.poll(Config.RESTIMEOUT):
-        res = sock.recv()
-        poller.unregister(sock)
-        return res
-    else:
-        poller.unregister(sock)
-        raise IOError('recv timeout!')
-
-
-def test1():
-    tik = time.time()
-    for i in range(1000):
-        send('bbb', 'hello world')
-    tok = time.time()
-    print tok - tik
-
-def test2():
+def test2(op):
     stock_map = {
             'aapl': 100.0,
             'wbai': 20.0,
@@ -74,13 +31,11 @@ def test2():
         counts = latest_price - org_price
         rge = counts / org_price * 100.0
         #print stock, steps, org_price, latest_price, counts, rge
-        send('stock', '%s,%.3g,%.3g,%.3g,%.3g' % (stock, latest_price, counts, rge, steps))
+        op.send('stock', '%s,%.3g,%.3g,%.3g,%.3g' % (stock, latest_price, counts, rge, steps))
 
 
 
 if __name__ == "__main__":
-    Config.dists = ['tcp://192.168.56.1:9074', 'tcp://192.168.56.101:9074', 'tcp://localhost:9074']
-    Config.WAKER_PROTOCOL = 'tcp://localhost:10910'
-    Config.INFORM_PROTOCOL = 'tcp://*:10910'
-    initialize()
-    test2()
+    op = Operation('localhost:9021')
+    # test1(op)
+    test2(op)
