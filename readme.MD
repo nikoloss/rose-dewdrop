@@ -1,3 +1,9 @@
+## Notice
+###### The project is temporary under reconstruction
+
+##注意
+###### 此项目目前处于大规模重构当中,预计完工预期3.14日
+
 ## What is Rose&Dewdrop?
 ######Rose&Dewdrop 是一个基于tornado和zeromq的分布式websocket消息发布组件
 * 其中rose构建于zeromq主要承担消息发布中心角色(HUB)

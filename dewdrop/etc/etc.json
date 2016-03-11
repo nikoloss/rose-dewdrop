@@ -4,7 +4,7 @@
   },
 
   /*  Information Headquarter(iHQ) */
-  "push_center": {
+  "push": {
     "ihq": "localhost:9022"
   }
 }

@@ -1,9 +1,0 @@
-{
-    "radio":{
-        /* 本地hub订阅rose hub节点的配置 */
-        "sub_to": ["tcp://localhost:9075", "tcp://192.168.56.101:9075"],
-        /* 本地hub首先使用mmap，如果系统不支持则退化到tcp */
-        "protocol_a": "ipc:///tmp/door.ipc",
-        "protocol_b": "tcp://*:10987"
-    }
-}

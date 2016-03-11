@@ -68,7 +68,7 @@ class Messager(object):
                     raw_topic = ':'.join(topic)
                     stamp = self.stamps.get(raw_topic)
                     dd['stamp'] = stamp
-                    self.callback(ujson.dumps(dd))
+                    self.callback(json.dumps(dd))
         except:
             pass
 
@@ -81,16 +81,11 @@ class PushWs(tornado.websocket.WebSocketHandler):
         return True
 
     def open(self):
-        self.prepare()
-
-    def prepare(self):
-        if not hasattr(self, '_is_open'):
-            self.messager = Messager(self.push)
-            self.timestamp = time.time()
-            self.messager.subscribe('SYS:PING', 'SYS:PING')
-            Statistics.CONNECTIONS += 1
-            app_log.info('online connections %d', Statistics.CONNECTIONS)
-            self._is_open = True
+        self.messager = Messager(self.push)
+        self.timestamp = time.time()
+        Statistics.CONNECTIONS += 1
+        app_log.info('online connections %d', Statistics.CONNECTIONS)
+        self._is_open = True
 
     def push(self, msg):
         if (time.time() - self.timestamp) > 2 * HEARTBEAT_CC:
@@ -123,13 +118,6 @@ class PushWs(tornado.websocket.WebSocketHandler):
             app_log.exception(e)
 
     def on_close(self):
-        if hasattr(self, '_is_open'):
-            self.messager.destroy()
+        self.messager.destroy()
         Statistics.CONNECTIONS -= 1
         app_log.info('online connections %d', Statistics.CONNECTIONS)
-
-
-@Application.register(path='/test')
-class Page(tornado.web.RequestHandler):
-    def get(self):
-        self.render('index.html')
