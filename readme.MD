@@ -3,6 +3,7 @@
 * 其中rose构建于zeromq主要承担消息发布中心角色(iHQ)
 * dewdrop构建于tornado并集成一个小型HUB(PUB/SUB)发布中心
 * rndsdk则承担给rose节点下达消息发布作业的角色
+
 ![r&d_structure](rdstu.png)
 
 * 疑问请联系(rowland.lan@163.com)
