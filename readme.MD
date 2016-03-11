@@ -20,7 +20,7 @@
     *   另一个好处就是rose节点挂掉不会导致前端设备与tornado的连接中断，未来只需要恢复rose-ihq，前端可以无痛感知
 
 ##演示
-######实例在demo中，先把dewdrop的serv.py跟rose的bloom.py跑起来，然后运行sdk中wand的test2，是一个每几十毫秒生成一条广播股价的服务，然后在浏览器中打开index.html看效果。
+######实例在demo中，先把dewdrop的serv.py跟rose的ihq.py跑起来，然后运行sdk中wand的test2，是一个每几十毫秒生成一条广播股价的服务，然后在浏览器中打开index.html看效果。
 
 ![demo_brush](cvb.gif)
 ![demo_stock](stock.gif)
