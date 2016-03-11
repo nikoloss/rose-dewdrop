@@ -15,7 +15,6 @@ MEMBERS = 0
 
 
 class Messager(object):
-
     def __init__(self, callback):
         self.callback = callback
         self.stamps = {}
@@ -31,6 +30,16 @@ class Messager(object):
         self._stream.close()
 
     def subscribe(self, raw_topic, stamp):
+        '''订阅
+            订阅的主题支持多级主题,用冒号分隔,例如
+            WEATHER:CHINA:HANGZHOU
+            订阅父主题将会收到所有该类主题消息,比如订阅了WEATHER:CHINA,将收到所有中国城市的天气
+
+            但由于zmq的订阅规则中并不支持多级主题,于是需要自己在内容中维护多级主题关系,将顶级主题送到zmq中
+
+            TODO 目前的多级主题(topics)的内存结构为列表,消息送达之后需整体遍历列表以判断用户是否订阅该主题
+            可以考虑使用trie树来优化
+        '''
         topic = raw_topic.split(':')
         if not topic:
             return
@@ -41,6 +50,10 @@ class Messager(object):
         self.topics.append(topic)
 
     def unsubscribe(self, raw_topic):
+        '''取消订阅
+            比订阅操作更复杂的是退订的时候必须检查顶级主题下的所以子主题都已经退订,如果有一个子主题还在就不能
+            完全从zmq当中退订该顶级主题
+        '''
         topic = raw_topic.split(':')
         if not topic:
             return
@@ -81,21 +94,23 @@ class PushWs(tornado.websocket.WebSocketHandler):
         return True
 
     def open(self):
+        # 每个新的websocket连接进来都会绑定一个基于zmqsocket的Messager对象订阅到本进程的消息发布中心HUB
         self.messager = Messager(self.push)
+        # 时间戳,每次客户端发消息都会刷新此时间戳,服务器在发送的时候会判断当前时间减去上次请求的时间戳超过两个心跳周期会主动断开
         self.timestamp = time.time()
         Statistics.CONNECTIONS += 1
         app_log.info('online connections %d', Statistics.CONNECTIONS)
-        self._is_open = True
 
     def push(self, msg):
         if (time.time() - self.timestamp) > 2 * HEARTBEAT_CC:
+            # 超过两个心跳周期没有任何数据则断开
             self.close()
         else:
             self.write_message(msg)
 
     def on_message(self, message):
         app_log.debug(message)
-        self.timestamp = time.time()
+        self.timestamp = time.time() #刷新时间戳
         try:
             content = json.loads(message)
             op = content['action']
