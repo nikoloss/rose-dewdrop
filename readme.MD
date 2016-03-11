@@ -16,7 +16,7 @@
 ##架构设计
 * dewdrop中tornado集成一个zeromq的PUB/SUB的迷你hub(使用ipc协议，实现为mmap)，每个websocket会绑定一个sub订阅这个本机hub
 * 本机hub同时订阅所有的rose HUB节点，一旦rose HUB发布消息，本地迷你hub做一次转发
-* rndsdk是用来给rose HUB下达消息作业的，采用蚁群算法确定最优节点
+* rndsdk是用来给rose iHQ下达消息作业的
 
 
 ## 为什么tornado节点不直接把websocket链接绑定到rose？
