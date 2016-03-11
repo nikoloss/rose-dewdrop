@@ -1,15 +1,11 @@
-#!/usr/bin/python
-#coding=utf-8
-#author Rowland
-#edit 2014-03-19 14:15:54
+# coding=utf-8
 import os
-import sys
 
+HOME_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-_HOME_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BIZ_PATH = os.path.join(HOME_PATH, 'biz')
+ETC_PATH = os.path.join(HOME_PATH, 'etc')
+LIB_PATH = os.path.join(HOME_PATH, 'lib')
 
-_BIZ_PATH = os.path.join(_HOME_PATH, 'biz')
-_ETC_PATH = os.path.join(_HOME_PATH, 'etc')
-_LIB_PATH = os.path.join(_HOME_PATH, 'lib')
 
 

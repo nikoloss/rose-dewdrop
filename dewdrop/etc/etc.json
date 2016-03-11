@@ -1,0 +1,10 @@
+{
+  "logging": {
+    "conf": "dev_log.conf"
+  },
+
+  /*  Information Headquarter(iHQ) */
+  "push_center": {
+    "ihq": "localhost:9022"
+  }
+}

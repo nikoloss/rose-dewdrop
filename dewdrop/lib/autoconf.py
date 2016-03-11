@@ -9,13 +9,14 @@ import traceback
 class ConfigParser(object):
     '''
         This abstract class provides a strategy of how to get those configurations
+        through a file or remote config ?
     '''
     @abstractmethod
     def parseall(self, *args):
         pass
 
 
-class when(object):
+class up(object):
     def __init__(self, func):
         self.func = func
 
@@ -73,7 +74,6 @@ class Configer(object):
         pass
 
 
-
 class ConfigParserFromFile(ConfigParser):
     '''
         via Config Files
@@ -85,14 +85,13 @@ class ConfigParserFromFile(ConfigParser):
         with open(fullpath, 'r') as f:
             raw = f.read()
             #去掉多行注释
-            raw_escape_comment = re.sub(r'[\s\t\n]+/\*[\s\S]+?\*/', '', raw)
+            raw_escape_comment = re.sub(r'/\*[\s\S]+?\*/', '', raw)
             cfg = json.loads(raw_escape_comment)
             if cfg.get('$includes'):
                 for include in cfg['$includes']:
                     icfg = self.parseall(os.path.join(etc, include))
                     cfg.update(icfg)
         return cfg
-
 
 
 conf_drawer = Configer()
