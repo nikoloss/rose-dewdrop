@@ -36,9 +36,6 @@ class Messager(object):
             订阅父主题将会收到所有该类主题消息,比如订阅了WEATHER:CHINA,将收到所有中国城市的天气
 
             但由于zmq的订阅规则中并不支持多级主题,于是需要自己在内容中维护多级主题关系,将顶级主题送到zmq中
-
-            TODO 目前的多级主题(topics)的内存结构为列表,消息送达之后需整体遍历列表以判断用户是否订阅该主题
-            可以考虑使用trie树来优化
         '''
         topic = raw_topic.split(':')
         if not topic:
@@ -47,6 +44,7 @@ class Messager(object):
             return
         self.stamps.update({raw_topic: stamp})
         self._sock.setsockopt(zmq.SUBSCRIBE, str(topic[0]))
+        #TODO 目前的多级主题(topics)的内存结构为列表,消息送达之后需整体遍历列表以判断用户是否订阅该主题,可以考虑使用trie树来优化
         self.topics.append(topic)
 
     def unsubscribe(self, raw_topic):
