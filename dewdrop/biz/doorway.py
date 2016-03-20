@@ -108,7 +108,7 @@ class PushWs(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         app_log.debug(message)
-        self.timestamp = time.time() #刷新时间戳
+        self.timestamp = time.time() #any response will be regarded as a heartbeat
         try:
             content = json.loads(message)
             op = content['action']
