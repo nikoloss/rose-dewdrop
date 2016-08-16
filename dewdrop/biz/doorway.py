@@ -20,7 +20,7 @@ class Messager(object):
         self.stamps = {}
         self.topics = []
         self._sock = ctx.socket(zmq.SUB)
-        self._sock.connect('inproc://monster')
+        self._sock.connect('ipc://monster')
         self._stream = ZMQStream(self._sock)
         self._stream.on_recv(self.recv)
 
@@ -131,6 +131,7 @@ class PushWs(tornado.websocket.WebSocketHandler):
             app_log.exception(e)
 
     def on_close(self):
-        self.messager.destroy()
+        if hasattr(self, 'messager'):
+            self.messager.destroy()
         Statistics.CONNECTIONS -= 1
         app_log.info('online connections %d', Statistics.CONNECTIONS)

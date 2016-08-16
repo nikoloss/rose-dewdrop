@@ -43,7 +43,7 @@ class Hubber(object):
         self._sub.setsockopt(zmq.SUBSCRIBE, '')
         self._sub.connect('tcp://{host}:{port}'.format(host=host, port=port))
         self._inproc_pub = ctx.socket(zmq.PUB)
-        self._inproc_pub.bind('inproc://monster')
+        self._inproc_pub.bind('ipc://monster')
         self._sstream = ZMQStream(self._sub)
         self._sstream.on_recv(self.recv)
 
@@ -73,5 +73,5 @@ if __name__ == "__main__":
     )
     app.listen(port)
 
-    app_log.info('starting...')
+    app_log.info('[{}]starting...'.format(os.getpid()))
     tornado.ioloop.IOLoop.instance().start()
