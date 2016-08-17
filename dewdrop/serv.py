@@ -1,8 +1,6 @@
 # coding: utf8
 
 import getopt
-import tornado.ioloop
-import tornado.web
 from tornado.log import app_log
 from zmq.eventloop.zmqstream import ZMQStream
 from zmq.eventloop.ioloop import ZMQIOLoop
@@ -26,7 +24,11 @@ def all_start(pcc):
     files_list = os.listdir(BIZ_PATH)
     files_list = set(['biz.' + x[:x.rfind(".")] for x in files_list if x.endswith(".py")])
     map(__import__, files_list)
-    Hubber(pcc['ihq'])  # subscirbe
+    pid = os.fork()
+    if not pid:
+        # in child process start the hub
+        Hubber(pcc['ihq'])  # subscirbe
+        loop.instance().start()
 
 class Hubber(object):
     '''
@@ -72,6 +74,5 @@ if __name__ == "__main__":
         xsrf_cookies=False
     )
     app.listen(port)
-
     app_log.info('[{}]starting...'.format(os.getpid()))
-    tornado.ioloop.IOLoop.instance().start()
+    loop.instance().start()
