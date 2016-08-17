@@ -4,7 +4,7 @@ import tornado.web
 import sys
 
 ctx = zmq.Context()
-
+ctx.set(zmq.MAX_SOCKETS, 1000000)
 
 class Statistics(object):
     CONNECTIONS = 0
