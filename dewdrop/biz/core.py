@@ -1,8 +1,8 @@
 # coding: utf8
 import zmq
 import tornado.web
-import sys
-
+import sys, os
+pid = os.getpid()
 ctx = zmq.Context()
 ctx.set(zmq.MAX_SOCKETS, 1000000)
 
