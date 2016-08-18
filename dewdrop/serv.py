@@ -45,7 +45,7 @@ class Hubber(object):
         self._sub.setsockopt(zmq.SUBSCRIBE, '')
         self._sub.connect('tcp://{host}:{port}'.format(host=host, port=port))
         self._inproc_pub = ctx.socket(zmq.PUB)
-        self._inproc_pub.bind('ipc://monster')
+        self._inproc_pub.bind('ipc:///tmp/monster_{}'.format(os.getpid()))
         self._sstream = ZMQStream(self._sub)
         self._sstream.on_recv(self.recv)
 
