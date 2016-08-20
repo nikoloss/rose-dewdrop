@@ -24,7 +24,6 @@ def all_start(pcc):
     files_list = os.listdir(BIZ_PATH)
     files_list = set(['biz.' + x[:x.rfind(".")] for x in files_list if x.endswith(".py")])
     map(__import__, files_list)
-    # in child process start the hub
     Hubber(pcc['ihq'])  # subscirbe
 
 class Hubber(object):
