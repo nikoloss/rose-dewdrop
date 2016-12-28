@@ -20,7 +20,7 @@ class Messager(object):
         self.stamps = {}
         self.topics = []
         self._sock = ctx.socket(zmq.SUB)
-        self._sock.connect('ipc://monster')
+        self._sock.connect('inproc:///tmp/monster_{}'.format(pid))
         self._stream = ZMQStream(self._sock)
         self._stream.on_recv(self.recv)
 
