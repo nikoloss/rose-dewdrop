@@ -26,7 +26,22 @@
 
 ## 演示
 ###### 实例在demo中，先把dewdrop的serv.py跟rose的ihq.py跑起来，然后运行sdk中wand的test2，是一个每几十毫秒生成一条广播股价的服务，然后在浏览器中打开index.html看效果。可以试着停止一下rose节点中断消息的发送，过一段时间再度开启，可以发现前端的webosket依旧可以继续接收消息，从而验证了这种架构的可靠性。
-
+```bash
+#安装依赖类库
+$>pip install tornado zmq
+#进入工程目录
+$>cd rose-dewdrop
+#在第一个terminal中运行dewdrop/serv.py开启ws服务
+$>cd dewdrop
+$>python serv.py
+#在第二个terminal中运行ihq.py消息发布通道服务
+$>cd rose
+$>python ihq.py
+#在第三个terminal中运行消息源
+$>cd rndsdk
+$>python wand.py
+#最后把demo/index.html拖入浏览器（不支持ie）查看效果
+```
 ![demo_brush](cvb.gif)
 ![demo_stock](stock.gif)
 
