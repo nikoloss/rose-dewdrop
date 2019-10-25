@@ -45,3 +45,5 @@ $>python wand.py
 ![demo_brush](cvb.gif)
 ![demo_stock](stock.gif)
 
+## 注意
+本代码在python2下写就，如果需要支持python3，请自行更改代码。
